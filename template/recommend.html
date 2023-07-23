@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Intelligence Books Suggester</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="icon" type="image/png" href="4488550.png">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<style>
+    body {
+        background-color: black;
+    }
+
+    .navbar {
+        background-color: #FFFFFF;
+    }
+
+    .navbar-brand {
+        color: black;
+    }
+
+    .text-white {
+        color: white;
+    }
+
+    .form-control {
+        background-color: #ffffff;
+        color: black;
+        font-size: 16px;
+        width: 350px;
+        height: 40px;
+        padding: 10px 20px;
+        margin-bottom: 30px;
+    }
+
+    select.form-control {
+        background-color: #d4f7dc;
+        color: black;
+    }
+
+    /* Style for the submit button */
+    .btn-warning {
+        background-color: #ff66b3;
+        color: #fff;
+        border: none;
+        padding: 14px 32px;
+        border-radius: 20px;
+        font-size: 14px;
+        text-transform: uppercase;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.2s;
+        animation: bounceIn 0.8s;
+    }
+
+    /* Hover effect */
+    .btn-warning:hover {
+        background-color: #ff0080;
+        transform: scale(1.1);
+    }
+
+    @keyframes bounceIn {
+        0% {
+            opacity: 0;
+            transform: scale(0.3);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    /* Center the content on the page */
+    .center-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    /* Center the header text */
+    .header-wrapper {
+        text-align: center;
+        border-radius: 20px;
+    }
+     .header-wrapper {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+     .book-list-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .book-item {
+        margin: 40px;
+        width: 15%; /* Display four books in a row (adjust as needed) */
+        padding: 2px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+        transition: transform 0.2s;
+    }
+    .book-item:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Add a ribbon-like header for the book title */
+        .ribbon {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: 100%;
+            height: 30px;
+            background-color: #ff66b3;
+            transform: rotate(-45deg);
+            z-index: 1;
+        }
+
+        /* Style for the book title in the ribbon */
+        .ribbon h5 {
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 30px;
+            margin: 0;
+        }
+
+        /* Style for the book image */
+        .book-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        /* Style for the book details */
+        .book-details {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .book-details h5 {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .book-details p {
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        /* Center the input form */
+        .search-form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        /* Style the "Recommend Books" header */
+.header-wrapper {
+  background: linear-gradient(to right, #ff66b3, #ff0080);
+  padding: 20px;
+  animation: fadeInUp 0.8s;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.form-wrapper {
+        display: flex;
+        justify-content: centre;
+    }
+
+</style>
+<body>
+
+    <nav class="navbar">
+        <a class="navbar-brand"></a>
+        <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/recommend">Recommend</a></li>
+            <li><a></a></li>
+        </ul>
+    </nav>
+
+    <div class="container center-content">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Center the "Recommend Books" header -->
+                <div class="header-wrapper">
+                    <h1 class="text-center text-white" style="font-size: 50px;">Intelligence Books Suggester</h1>
+                    <h3 class = "text-center text-white" style="font-size: 25px;">based on Collaborative Filtering</h3>
+                </div>
+                <div class ="form-wrapper">
+                <div class="col-md-6 col-md-offset-3">
+                    <form action="/recommend_books" method="post" onsubmit="return validateInput();">
+                        <input name="user_input" type="text" class="form-control" placeholder="..type book name"><br>
+                        <p class="text-white text-center" style="margin-top: -35px;">Try typing:Neverwhere
+,The Notebook, Icebound , A Walk to Remember,1984 ,To Kill a Mockingbird</p>
+                        <div class="text-center"> <!-- Center the button -->
+                            <!-- Beautified submit button -->
+                            <input type="submit" class="btn btn-sm btn-warning" value="tell me more like this..">
+                        </div>
+                        <p id="error-message" class="text-danger"></p> <!-- Placeholder for error message -->
+                    </form>
+                </div>
+            </div>
+                </div>
+
+                {% if data %}
+                {% for i in data %}
+                     <div class="book-item col-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <img class="card-img-top" src="{{i[2]}}">
+                                    <p class="text-white">{{i[0]}}</p>
+                                    <h5 class="text-white">~ {{i[1]}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                {% endfor %}
+            {% endif %}
+            <div style="clear: both;"></div> <!-- Clear the float to maintain layout -->
+            </div>
+        </div>
+
+
+   <script>
+        function validateInput() {
+            const userInput = document.querySelector('input[name="user_input"]').value;
+
+            if (userInput.trim() === "") {
+            document.getElementById('error-message').textContent = "Oops,! Please enter a book name.";
+            return false; // Prevent form submission
+        } else if (!validBookNames.includes(userInput)) {
+                document.getElementById('error-message').textContent = "Sorry, the book name you entered is incorrect.";
+            return false; // Prevent form submission
+        } else {
+            document.getElementById('error-message').textContent = "";
+            return true; // Allow form submission
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Books Store</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<style>
+    body {
+        background-color: black;
+    }
+
+    .navbar {
+        background-color: white;
+    }
+
+    .navbar-brand {
+        color: black;
+    }
+
+    .container {
+        padding-top: 50px;
+    }
+
+    .book-item {
+        margin-bottom: 30px;
+        border-radius: 10px; /* Rounded corners for the card */
+        background-color: #f9f9f9;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s;
+    }
+
+    .book-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .book-img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-top-left-radius: 10px; /* Rounded corners for the book image */
+        border-top-right-radius: 10px;
+    }
+
+    .book-details {
+        padding: 10px;
+    }
+
+    .book-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #555;
+    }
+
+    .book-author {
+        font-size: 16px;
+        color: #777;
+        margin-bottom: 10px;
+    }
+
+    .book-votes {
+        color: #f00;
+        margin-bottom: 5px;
+    }
+
+    .book-rating {
+        color: #00f;
+    }
+
+    .votes {
+        color: #ff66b3; /* Pink color for votes */
+        margin-top: 10px;
+    }
+
+    .rating {
+        color: #00bfff; /* Blue color for rating */
+    }
+
+    /* Style to set text color to white in the card */
+    .card-text-white {
+        color: white;
+    }
+
+    .stylish-heading {
+        background-image: linear-gradient(to right, #ff66b3, #0080ff);
+        color: white;
+        font-family: 'Pacifico', cursive;
+        font-size: 60px;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 30px;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        animation: pulse 2s infinite;
+    }
+
+    /* Add a subtle pulsating animation to the cards on hover */
+    .book-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+        animation: pulse 0.5s infinite;
+    }
+
+
+
+    /* Button style */
+    .btn-primary {
+        background-color: #ff66b3;
+        border-color: #00bfff;
+    }
+
+    .btn-primary:hover {
+        background-color: #ff66b3;
+        border-color: #0080ff;
+    }
+
+    /* Footer style */
+    .footer {
+        text-align: center;
+        padding: 20px 0;
+        background-color: #333;
+        color: #fff;
+    }
+    .small-text {
+        font-size: 30px; /* You can adjust the font size as needed */
+    }
+
+</style>
+<body>
+
+    <nav class="navbar">
+        <a class="navbar-brand"></a>
+        <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/recommend">Recommend</a></li>
+            <li><a></a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="stylish-heading">Bestsellers Books Paradise
+                 <br>
+
+                <span class="small-text">- Popularity based</span></h1>
+            </div>
+
+            {% for i in range(book_name|length) %}
+                <div class="col-md-3">
+                    <div class="book-item" style="margin-top: 50px;">
+                        <div class="card" style="height: 450px;background-color: black;">
+                            <div class="card-body" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+                                <div class="book-img" style="height: 200px; overflow: hidden;">
+                                    <img class="img-responsive" src="{{ image[i] }}" onerror="this.src='/path/to/default-image.jpg';" style="object-fit: cover; width: 100%; height: 100%; border-top-left-radius: 10px; border-top-right-radius: 10px;"> <!-- Rounded corners for the book image -->
+                                </div>
+                                <div>
+                                    <p class="card-text-white">{{ book_name[i] }}</p>
+                                    <h4 class="card-text-white">{{ author[i] }}</h4>
+                                    <h4 class="card-text-white">Votes - {{ votes[i] }}</h4>
+                                    <h4 class="card-text-white">Rating - {{ '%.1f'|format((rating[i] / 10) * 8) }}/5</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+</body>
+</html>
